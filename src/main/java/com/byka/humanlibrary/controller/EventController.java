@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(path = "/events")
 public class EventController {
+    private static final Integer EVENTS_COUNT = 5;
+
     @Autowired
     private EventService eventService;
 
@@ -22,7 +24,7 @@ public class EventController {
     @GetMapping(value = "/nearest")
     @ResponseBody
     public ListWrapper<EventData> getNearest() {
-        return new ListWrapper<>(eventService.getLatest());
+        return new ListWrapper<>(eventService.getLatest(EVENTS_COUNT));
     }
 
     @GetMapping(value = "/catalog/{eventId}")
